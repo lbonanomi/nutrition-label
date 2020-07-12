@@ -72,7 +72,7 @@ export LANG5_BYTES=$(sort -rnk2 STATS | head -5 | tail -1 | awk '{ printf "%i KB
 # Populate template SVG with values
 #
 printf '\e[1;32m%-6s\e[m' "Building SVG\n"
-cat template.svg | envsubst | base64 > label.svg
+curl https://raw.githubusercontent.com/lbonanomi/nutrition-label/main/template.svg | envsubst | base64 > label.svg
 
 # Get SHA of existing label
 #
