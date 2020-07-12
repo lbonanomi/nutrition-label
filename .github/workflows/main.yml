@@ -1,0 +1,19 @@
+on:
+  schedule:
+    - cron: "30 */4 * * *"
+
+#on: [ push ]
+
+jobs:
+  generate_content_label:
+    runs-on: ubuntu-latest
+    name: Concentrate organization's top-7 languages
+
+    env:
+      TOKEN: ${{ secrets.TOKEN }}   
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Concentrate and generate
+        uses: ./ # Uses an action in the root directory
