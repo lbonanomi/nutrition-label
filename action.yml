@@ -1,6 +1,7 @@
 # action.yml
-name: 'Content Label'
-description: 'Generator'
+name: 'user Nutrition Label'
+author: 'lbonanomi'
+description: 'Generate Nutritionl Information label for a user statistics'
 inputs:
   count-forked:  # id of input
     description: 'Include forked repos'
