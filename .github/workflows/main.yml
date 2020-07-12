@@ -1,8 +1,8 @@
-on:
-  schedule:
-    - cron: "30 */4 * * *"
+#on:
+#  schedule:
+#    - cron: "30 */4 * * *"
 
-#on: [ push ]
+on: [ push ]
 
 jobs:
   generate_content_label:
