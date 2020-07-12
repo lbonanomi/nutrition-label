@@ -12,3 +12,6 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.count-forked }}
+branding:
+  icon: 'box'  
+  color: 'purple'
