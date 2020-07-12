@@ -8,15 +8,15 @@
 # Get PR stats
 #
 
-printf '\e[1;32m%-6s\e[m' "Counting collaborating repos\n"
+printf '\e[1;32m%-6s\e[m\n' "Counting collaborating repos"
 export MIX_WITH=$(curl -s -u :$TOKEN "https://api.github.com/search/issues?q=author:$GITHUB_ACTOR+is:pr+is:merged+is:public+-user:$GITHUB_ACTOR" | jq .items[].repository_url | sort | uniq | wc -l) 
 
-printf '\e[1;32m%-6s\e[m' "Counting opened PRs\n"
+printf '\e[1;32m%-6s\e[m\n' "Counting opened PRs"
 export PULL_COUNT=$(curl -s -u :$TOKEN "https://api.github.com/search/issues?q=author:$GITHUB_ACTOR+is:pr+is:merged+is:public+-user:$GITHUB_ACTOR" | jq .total_count)
 
 # Get issue stats
 #
-printf '\e[1;32m%-6s\e[m' "Counting opened issues\n"
+printf '\e[1;32m%-6s\e[m\n' "Counting opened issues"
 export JAM_WITH=$(curl -s -u :$TOKEN "https://api.github.com/search/issues?q=iis:issue+commenter:$GITHUB_ACTOR+-user:$GITHUB_ACTOR" | jq .items[].repository_url | sort | uniq | wc -l)
 
 # Get language stats

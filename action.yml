@@ -2,12 +2,12 @@
 name: 'Content Label'
 description: 'Generator'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  count-forked:  # id of input
+    description: 'Include forked repos'
     required: true
-    default: 'World'
+    default: 'false'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.count-forked }}
