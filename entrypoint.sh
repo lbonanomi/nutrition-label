@@ -37,7 +37,7 @@ else
 	done > BUFF
 fi
 
-printf '\e[1;32m%-6s\e[m' "Tallying lngauges\n"
+printf '\e[1;32m%-6s\e[m\n' "Tallying lngauges"
 awk '{ print $1 }' BUFF | sort | uniq | while read uniq_lang
 do
 	awk '$1 == "'$uniq_lang'" { a=a+$2 } END { print "'$uniq_lang'",a }'  BUFF >> STATS
@@ -45,13 +45,13 @@ done
 
 # Count local repos
 #
-printf '\e[1;32m%-6s\e[m' "Tallying user's repositories\n"
+printf '\e[1;32m%-6s\e[m\n' "Tallying user's repositories"
 export REPO_COUNT=$(curl -s https://api.github.com/users/$GITHUB_ACTOR/repos | jq .[].full_name | wc -l)
 
 # Calculate language stats
 #
 
-printf '\e[1;32m%-6s\e[m' "Calculating language use\n"
+printf '\e[1;32m%-6s\e[m\n' "Calculating language use"
 
 export LANG1_NAME=$(sort -rnk2 STATS | head -1 | awk '{ print $1 }')
 export LANG1_BYTES=$(sort -rnk2 STATS | head -1 | awk '{ printf "%i KB\n", $2 / 1024 }')
@@ -71,17 +71,17 @@ export LANG5_BYTES=$(sort -rnk2 STATS | head -5 | tail -1 | awk '{ printf "%i KB
 
 # Populate template SVG with values
 #
-printf '\e[1;32m%-6s\e[m' "Building SVG\n"
-curl https://raw.githubusercontent.com/lbonanomi/nutrition-label/main/template.svg | envsubst | base64 > label.svg
+printf '\e[1;32m%-6s\e[m\n' "Building SVG"
+curl -s https://raw.githubusercontent.com/lbonanomi/nutrition-label/main/template.svg | envsubst | base64 > label.svg
 
 # Get SHA of existing label
 #
-printf '\e[1;32m%-6s\e[m' "Getting SHA of current SVG\n"
+printf '\e[1;32m%-6s\e[m\n' "Getting SHA of current SVG"
 CURRENT_SHA=$(curl -L -s -u :$TOKEN https://api.github.com/repos/$GITHUB_REPOSITORY/contents/label.svg | jq .sha | tr -d '"' | head -1)
 
 # Push new label
 #
-printf '\e[1;32m%-6s\e[m' "Publishing SVG\n"
+printf '\e[1;32m%-6s\e[m\n' "Publishing SVG"
 curl -s -u :$TOKEN -X PUT -d '{ "message":"Re-label", "sha":"'$CURRENT_SHA'", "content":"'$(cat label.svg | tr -d '\n\r')'"}' https://api.github.com/repos/$GITHUB_REPOSITORY/contents/label.svg | jq .content.html_url
 
 rm STATS
