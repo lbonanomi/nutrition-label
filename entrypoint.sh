@@ -1,6 +1,5 @@
 #!/bin/sh -l
 
-
 [[ -n "$TOKEN" ]] || printf '\e[1;31m%-6s\e[m' "Create a secret called \"TOKEN\" with write permission to $GITHUB_REPOSITORY\n"
 [[ -n "$TOKEN" ]] || exit 1
 
@@ -53,20 +52,38 @@ export REPO_COUNT=$(curl -s https://api.github.com/users/$GITHUB_ACTOR/repos | j
 
 printf '\e[1;32m%-6s\e[m\n' "Calculating language use"
 
+# Get percentage-of-all-repos
+#
+
+TOTAL=$(awk '{ total=total+$2 } END { print total }' STATS)
+
+awk '{ print $1 }' STATS | sort | uniq | while read lang
+do
+        printf "$lang\t"
+        awk '/'"$lang"'/ { total=total+$2 } END { print (total * 100) / '"$TOTAL"' }' STATS
+done > PCT
+
+###
+
 export LANG1_NAME=$(sort -rnk2 STATS | head -1 | awk '{ print $1 }')
 export LANG1_BYTES=$(sort -rnk2 STATS | head -1 | awk '{ printf "%i KB\n", $2 / 1024 }')
+export LANG1_PCT=$(grep $LANG1_NAME PCT | awk '{ print $2 }')
 
 export LANG2_NAME=$(sort -rnk2 STATS | head -2 | tail -1 | awk '{ print $1 }')
 export LANG2_BYTES=$(sort -rnk2 STATS | head -2 | tail -1 | awk '{ printf "%i KB\n", $2 / 1024 }')
+export LANG2_PCT=$(grep $LANG2_NAME PCT | awk '{ print $2 }')
 
 export LANG3_NAME=$(sort -rnk2 STATS | head -3 | tail -1 | awk '{ print $1 }')
 export LANG3_BYTES=$(sort -rnk2 STATS | head -3 | tail -1 | awk '{ printf "%i KB\n", $2 / 1024 }')
+export LANG3_PCT=$(grep $LANG3_NAME PCT | awk '{ print $2 }')
 
 export LANG4_NAME=$(sort -rnk2 STATS | head -4 | tail -1 | awk '{ print $1 }')
 export LANG4_BYTES=$(sort -rnk2 STATS | head -4 | tail -1 | awk '{ printf "%i KB\n", $2 / 1024 }')
+export LANG4_PCT=$(grep $LANG4_NAME PCT | awk '{ print $2 }')
 
 export LANG5_NAME=$(sort -rnk2 STATS | head -5 | tail -1 | awk '{ print $1 }')
 export LANG5_BYTES=$(sort -rnk2 STATS | head -5 | tail -1 | awk '{ printf "%i KB\n", $2 / 1024 }')
+export LANG5_PCT=$(grep $LANG5_NAME PCT | awk '{ print $2 }')
 
 
 # Populate template SVG with values
