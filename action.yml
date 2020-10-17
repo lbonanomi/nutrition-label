@@ -1,7 +1,7 @@
 # action.yml
 name: 'User Nutrition Label'
 author: 'lbonanomi'
-description: 'Generate Nutritionl Information label for a user statistics'
+description: 'Generate "Nutritional" Information label for a user statistics'
 inputs:
   count-forked:
     description: 'Include forked repos'
