@@ -1,2 +1,12 @@
-- name: User Nutrition Label
-  uses: lbonanomi/nutrition-label@1.4
+name: Label
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 5,17 * * *'
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: lbonanomi/nutrition-label@1.4
