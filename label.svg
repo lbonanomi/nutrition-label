@@ -9,7 +9,7 @@
 
 	<line x1="15" y1="50" x2="244" y2="50" style="stroke:rgb(0,0,0);stroke-width:1" />
 
-	<text x="15" y="69" font-family="Helvetica" lengthAdjust="spacingAndGlyphs">13 servings per organization</text>
+	<text x="15" y="69" font-family="Helvetica" lengthAdjust="spacingAndGlyphs">14 servings per organization</text>
 
 	<text x="15" y="88" font-family="Helvetica" font-weight="bold" lengthAdjust="spacingAndGlyphs">Serving size</text> 
 	<text x="150" y="88" font-family="Helvetica" font-weight="bold" lengthAdjust="spacingAndGlyphs">1 repo</text>
