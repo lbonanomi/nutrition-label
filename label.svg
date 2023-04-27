@@ -17,7 +17,7 @@
 	<line x1="15" y1="100" x2="244" y2="100" style="stroke:rgb(0,0,0);stroke-width:9" />
 	
 	<text	x="15" y="120" font-family="Helvetica" font-weight="bold" lengthAdjust="spacingAndGlyphs">Collaborates with:</text>
-	<text	x="242" y="120" font-family="Helvetica"	text-anchor="end"	lengthAdjust="spacingAndGlyphs">8 Orgs</text>
+	<text	x="242" y="120" font-family="Helvetica"	text-anchor="end"	lengthAdjust="spacingAndGlyphs">9 Orgs</text>
 
 	<line x1="15" y1="129" x2="244" y2="129" style="stroke:rgb(0,0,0);stroke-width:2" />
 	
