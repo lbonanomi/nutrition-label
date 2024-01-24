@@ -49,7 +49,7 @@
 	<text 	x="245"	y="295" font-family="Helvetica"						lengthAdjust="spacingAndGlyphs"	text-anchor="end">13%</text>
 	
 	<line	x1="15"	y1="305" x2="245" y2="305" style="stroke:rgb(0,0,0);stroke-width:2" />
-	<text 	x="15"	y="325" font-family="Helvetica" font-weight="bold"	lengthAdjust="spacingAndGlyphs">Dockerfile</text>
+	<text 	x="15"	y="325" font-family="Helvetica" font-weight="bold"	lengthAdjust="spacingAndGlyphs">Docker</text>
 	<text	x="75"	y="325" font-family="Helvetica" 						lengthAdjust="spacingAndGlyphs">2 KB</text>
 	<text	x="245"	y="325" font-family="Helvetica"						lengthAdjust="spacingAndGlyphs"	text-anchor="end">3%</text>
 	
