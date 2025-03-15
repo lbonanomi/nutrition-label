@@ -24,13 +24,13 @@ export JAM_WITH=$(curl -s -u :$TOKEN "https://api.github.com/search/issues?q=iis
 if [[ $1 == "true" ]]
 then
 	# Include forked repos
-	curl -s https://api.github.com/users/$GITHUB_ACTOR/repos | jq .[].languages_url | tr -d '"' | while read dump
+	curl -s https://api.github.com/users/$GITHUB_ACTOR/repos | jq -r .[].languages_url | while read dump
 	do
 		curl -s $dump | awk '/:/ { gsub(/\"/,"");gsub(/:/,"");gsub(/,/,""); print; }'
 	done > BUFF
 else
 	# Exclude forked repos
-	curl -s https://api.github.com/users/$GITHUB_ACTOR/repos | jq '.[] | "\(.languages_url ) \(.fork)"' | tr -d '"' | awk '/false$/ { print $1 }' | while read dump
+	curl -s https://api.github.com/users/$GITHUB_ACTOR/repos | jq -r '.[] | "\(.languages_url ) \(.fork)"' | awk '/false$/ { print $1 }' | while read dump
 	do
 		curl -s $dump | awk '/:/ { gsub(/\"/,"");gsub(/:/,"");gsub(/,/,""); print; }' 
 	done > BUFF
@@ -95,7 +95,7 @@ curl -s https://raw.githubusercontent.com/lbonanomi/nutrition-label/main/templat
 # Get SHA of existing label
 #
 printf '\e[1;32m%-6s\e[m\n' "Getting SHA of current SVG"
-CURRENT_SHA=$(curl -L -s -u :$TOKEN https://api.github.com/repos/$GITHUB_REPOSITORY/contents/label.svg | jq .sha | tr -d '"' | head -1)
+CURRENT_SHA=$(curl -L -s -u :$TOKEN https://api.github.com/repos/$GITHUB_REPOSITORY/contents/label.svg | jq -r .sha | head -1)
 
 # Push new label
 #
