@@ -1,0 +1,12 @@
+name: Label
+
+on:
+  workflow_dispatch:
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.TOKEN }}     
+    steps:
+    - uses: lbonanomi/nutrition-label@1.4
